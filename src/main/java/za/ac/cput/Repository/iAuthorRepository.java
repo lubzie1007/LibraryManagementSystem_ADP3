@@ -2,6 +2,8 @@ package za.ac.cput.Repository;
 
 import za.ac.cput.Domain.Author;
 
+import java.util.List;
+
 public interface iAuthorRepository {
 
 
@@ -13,13 +15,11 @@ public interface iAuthorRepository {
 
     boolean delete(String name);
 
-    String getall();
+    String getall();List<Author> getAll();
 
-    public interface IAuthorRepository extends IRepositoryAuthor<Author, String> {
 
-        String getall();
     }
 
-}
+
 //Author: Muneeb Solomons//
 //Date: 26 March 2024//

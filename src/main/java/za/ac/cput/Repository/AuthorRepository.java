@@ -28,10 +28,7 @@ public class AuthorRepository implements iAuthorRepository {
     @Override
     public Author create(Author author) {
         boolean success = authorList.add(author);
-        if (success)
-            return author;
-        else
-            return null;
+        return success ? author : null;
     }
 
     @Override
@@ -44,17 +41,15 @@ public class AuthorRepository implements iAuthorRepository {
     }
 
     @Override
-    public Author update(Author author) {
-        String name = author.getName();
-        Author authorList = read(name);
-        if (name == null)
-            return null;
-        if (delete(name)) {
-            if (authorList.add(author))
-                return author;
+    public Author update(Author updatedAuthor) {
+        String name = updatedAuthor.getName();
+        Author existingAuthor = read(name);
+        if (existingAuthor == null) {
             return null;
         }
-        return null;
+        authorList.remove(existingAuthor);
+        authorList.add(updatedAuthor);
+        return updatedAuthor;
     }
 
     @Override
@@ -72,6 +67,11 @@ public class AuthorRepository implements iAuthorRepository {
     public String getall() {
         return authorList.toString();
 
+    }
+
+    @Override
+    public List<Author> getAll() {
+        return null;
     }
 }
 

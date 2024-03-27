@@ -1,6 +1,6 @@
 package za.ac.cput.Domain;
 
-import java.awt.print.Book;
+import za.ac.cput.Domain.Book;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -69,6 +69,9 @@ public class Author{
     }
 
 
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
     public static class Builder {
 
         private String name;
@@ -85,6 +88,7 @@ public class Author{
             this.nationality = nationality;
             return this;
         }
+
         public Builder setBirthYear(int birthYear) {
             this.birthYear = birthYear;
             return this;
@@ -96,9 +100,13 @@ public class Author{
             this.booksWritten = e.booksWritten;
             return this;
         }
+
         public Author build() {return new Author (this);  }
 
-
+        public Builder setBooksWritten(List<Book> booksWritten) {
+            this.booksWritten = booksWritten;
+            return this;
+        }
 
     }
 }

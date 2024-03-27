@@ -1,4 +1,4 @@
-package za.ac.cput.Domain;
+package za.ac.cput.Domain.Test;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;

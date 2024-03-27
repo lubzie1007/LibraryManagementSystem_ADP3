@@ -1,6 +1,6 @@
 package za.ac.cput.Domain;
 
-import java.awt.print.Book;
+
 import java.util.ArrayList;
 import java.util.List;
 // Ronewa Khashane
@@ -52,6 +52,10 @@ public class Patron {
         borrowedBooks.remove(book);
     }
 
+    public void setBorrowedBooks(List<Book> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
+
     // Builder class
     public static class Builder {
         private int id;
@@ -75,6 +79,12 @@ public class Patron {
             this.email = email;
             return this;
         }
+
+        public Builder borrowedBooks(List<Book> borrowedBooks) {
+            this.borrowedBooks = borrowedBooks;
+            return this;
+        }
+
 
         public Patron build() {
             return new Patron(this);

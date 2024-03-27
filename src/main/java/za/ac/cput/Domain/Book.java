@@ -1,7 +1,5 @@
 package za.ac.cput.Domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /*Book.java
@@ -10,18 +8,36 @@ Author: Petlo Jonathan Matabane 220294496
 Date: 27 March 2024
  */
 public class Book {
-    private final String isbn;
-    private final String title;
-    private final String author;
-    private final String genre;
-    private final int publicationYear;
-    private final boolean available;
+    private  String isbn;
+    private  String title;
+    private  String author;
+    private  String genre;
+    private  int publicationYear;
+    private  boolean available;
+
+    public Book(Builder builder) {
+        this.isbn = builder.isbn;
+        this.title = builder.title;
+        this.author = builder.author;
+        this.genre = builder.genre;
+        this.publicationYear = builder.publicationYear;
+        this.available = builder.available;
+    }
+
+    public Book(String bookTitle, String author) {
+    }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Book book)) return false;
-        return getPublicationYear() == book.getPublicationYear() && isAvailable() == book.isAvailable() && getIsbn().equals(book.getIsbn()) && getTitle().equals(book.getTitle()) && getAuthor().equals(book.getAuthor()) && getGenre().equals(book.getGenre());
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Book other = (Book) obj;
+        // Check for null before invoking equals on isbn
+        return Objects.equals(isbn, other.isbn);
     }
 
     @Override
@@ -41,14 +57,6 @@ public class Book {
         return Objects.hash(getIsbn(), getTitle(), getAuthor(), getGenre(), getPublicationYear(), isAvailable());
     }
 
-    private Book(Builder builder) {
-        this.isbn = builder.isbn;
-        this.title = builder.title;
-        this.author = builder.author;
-        this.genre = builder.genre;
-        this.publicationYear = builder.publicationYear;
-        this.available = builder.available;
-    }
 
     public String getIsbn() {
         return isbn;
@@ -74,6 +82,30 @@ public class Book {
         return available;
     }
 
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setPublicationYear(int publicationYear) {
+        this.publicationYear = publicationYear;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
     public static class Builder {
         private final String isbn;
         private final String title;
@@ -82,10 +114,13 @@ public class Book {
         private int publicationYear;
         private boolean available;
 
+
+
         public Builder(String isbn, String title) {
-            this.isbn = isbn;
-            this.title = title;
+            this.isbn = Objects.requireNonNull(isbn, "ISBN cannot be null");
+            this.title = Objects.requireNonNull(title, "Title cannot be null");
         }
+
 
         public Builder author(String author) {
             this.author = author;

@@ -10,17 +10,45 @@ import static org.junit.jupiter.api.Assertions.*;
 class AuthorFactoryTest {
 
     @Test
-    void testBuildEmployer() {
-        Author e = AuthorFactory.buildAuthor();
+    void testAuthorCreation() {
+        Author author = new Author.Builder()
+                .setName("John Doe")
+                .setNationality("American")
+                .setBirthYear(1980)
+                .build();
 
-        assertNotNull(e);
-        System.out.println(e.toString());
+        assertNotNull(author);
+        assertEquals("John Doe", author.getName());
+        assertEquals("American", author.getNationality());
+        assertEquals(1980, author.getBirthYear());
+        assertNull(author.getBooksWritten()); // Assuming booksWritten is initialized as null
     }
     @Test
-    void testBuildEmployeeWithFail() {
-        Author e = AuthorFactory.buildAuthor();
+    void testAuthorEquality() {
+        Author author1 = new Author.Builder()
+                .setName("John Doe")
+                .setNationality("American")
+                .setBirthYear(1980)
+                .build();
 
-        assertNotNull(e);
-        System.out.println(e.toString());
+        Author author2 = new Author.Builder()
+                .setName("John Doe")
+                .setNationality("American")
+                .setBirthYear(1980)
+                .build();
+
+        assertEquals(author1, author2);
+    }
+
+    @Test
+    void testAuthorToString() {
+        Author author = new Author.Builder()
+                .setName("John Doe")
+                .setNationality("American")
+                .setBirthYear(1980)
+                .build();
+
+        String expectedString = "Author{name='John Doe', nationality='American', birthYear=1980, booksWritten=null}";
+        assertEquals(expectedString, author.toString());
     }
 }
